@@ -155,10 +155,10 @@ class Version:  # pylint: disable=too-many-instance-attributes
         :raises BumpError: if the version has a beta identifier
         :raises BumpError: if the version has a release-candidate identifier
         """
-        if self._beta != 0:
+        if self._beta != 0 and self._beta is not None:
             raise BumpError("Cannot bump 'alpha' version on a 'beta' release.")
 
-        if self._rc != 0:
+        if self._rc != 0 and self._rc is not None:
             raise BumpError("Cannot bump 'alpha' version on a 'rc' release.")
 
         if self._alpha is None:
@@ -171,7 +171,7 @@ class Version:  # pylint: disable=too-many-instance-attributes
 
         :raises BumpError: if the version has a release-candidate identifier
         """
-        if self._rc != 0:
+        if self._rc != 0 and self._rc is not None:
             raise BumpError("Cannot bump 'beta' version on a 'rc' release.")
 
         if self._beta is None:
