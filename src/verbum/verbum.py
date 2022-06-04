@@ -119,15 +119,15 @@ class Version:  # pylint: disable=too-many-instance-attributes
     def __str__(self) -> str:
         """Build a version string from the single components."""
         new_version = f"{self._major}.{self._minor}.{self._patch}"
-        if self._alpha != 0:
+        if self._alpha != 0 and self._alpha is not None:
             new_version += f"a{self._alpha}"
-        if self._beta != 0:
+        if self._beta != 0 and self._beta is not None:
             new_version += f"b{self._beta}"
-        if self._rc != 0:
+        if self._rc != 0 and self._rc is not None:
             new_version += f"rc{self._rc}"
-        if self._post != 0:
+        if self._post != 0 and self._post is not None:
             new_version += f".post{self._post}"
-        if self._dev != 0:
+        if self._dev != 0 and self._dev is not None:
             new_version += f".dev{self._dev}"
 
         return new_version
