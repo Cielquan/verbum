@@ -4,7 +4,7 @@ import re
 import sys
 
 
-if sys.version_info[0:2] < (3, 10):
+if sys.version_info[0:2] < (3, 10):  # pragma: no cover
     raise RuntimeError("Script runs only with python 3.10 or newer.")
 
 
