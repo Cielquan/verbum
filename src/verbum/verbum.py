@@ -56,11 +56,46 @@ class Version:  # pylint: disable=too-many-instance-attributes
         self._major = int(version_parts.group("major"))
         self._minor = int(version_parts.group("minor"))
         self._patch = int(version_parts.group("patch"))
-        self._alpha = int(version_parts.group("alpha") or 0)
-        self._beta = int(version_parts.group("beta") or 0)
-        self._rc = int(version_parts.group("rc") or 0)
-        self._post = int(version_parts.group("post") or 0)
-        self._dev = int(version_parts.group("dev") or 0)
+
+        match version_parts.group("alpha"):
+            case None:
+                self._alpha = None
+            case "0":
+                raise ValueError("0 is not a valid alpha counter.")
+            case _:
+                self._alpha = int(version_parts.group("alpha"))
+
+        match version_parts.group("beta"):
+            case None:
+                self._beta = None
+            case "0":
+                raise ValueError("0 is not a valid beta counter.")
+            case _:
+                self._beta = int(version_parts.group("beta"))
+
+        match version_parts.group("rc"):
+            case None:
+                self._rc = None
+            case "0":
+                raise ValueError("0 is not a valid rc counter.")
+            case _:
+                self._rc = int(version_parts.group("rc"))
+
+        match version_parts.group("post"):
+            case None:
+                self._post = None
+            case "0":
+                raise ValueError("0 is not a valid post counter.")
+            case _:
+                self._post = int(version_parts.group("post"))
+
+        match version_parts.group("dev"):
+            case None:
+                self._dev = None
+            case "0":
+                raise ValueError("0 is not a valid dev counter.")
+            case _:
+                self._dev = int(version_parts.group("dev"))
 
     def __repr__(self) -> str:
         """Show the version's components."""
@@ -124,6 +159,8 @@ class Version:  # pylint: disable=too-many-instance-attributes
         if self._rc != 0:
             raise BumpError("Cannot bump 'alpha' version on a 'rc' release.")
 
+        if self._alpha is None:
+            self._alpha = 0
         self._alpha += 1
         self._post = self._dev = 0
 
@@ -135,21 +172,29 @@ class Version:  # pylint: disable=too-many-instance-attributes
         if self._rc != 0:
             raise BumpError("Cannot bump 'beta' version on a 'rc' release.")
 
+        if self._beta is None:
+            self._beta = 0
         self._beta += 1
         self._alpha = self._post = self._dev = 0
 
     def bump_rc(self) -> None:
         """Bump the release-candidate version."""
+        if self._rc is None:
+            self._rc = 0
         self._rc += 1
         self._alpha = self._beta = self._post = self._dev = 0
 
     def bump_post(self) -> None:
         """Bump the post version."""
+        if self._post is None:
+            self._post = 0
         self._post += 1
         self._dev = 0
 
     def bump_dev(self) -> None:
         """Bump the dev version."""
+        if self._dev is None:
+            self._dev = 0
         self._dev += 1
 
     def bump_version_by_type(self, increase_type: BumpType) -> None:
