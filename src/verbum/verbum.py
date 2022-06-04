@@ -164,6 +164,11 @@ class Version:  # pylint: disable=too-many-instance-attributes
         if self._alpha is None:
             self._alpha = 0
         self._alpha += 1
+
+        if self._post != 0 and self._post is not None:
+            self._patch += 1
+            self._alpha = 1
+
         self._post = self._dev = 0
 
     def bump_beta(self) -> None:
@@ -177,6 +182,11 @@ class Version:  # pylint: disable=too-many-instance-attributes
         if self._beta is None:
             self._beta = 0
         self._beta += 1
+
+        if self._post != 0 and self._post is not None:
+            self._patch += 1
+            self._beta = 1
+
         self._alpha = self._post = self._dev = 0
 
     def bump_rc(self) -> None:
@@ -184,6 +194,11 @@ class Version:  # pylint: disable=too-many-instance-attributes
         if self._rc is None:
             self._rc = 0
         self._rc += 1
+
+        if self._post != 0 and self._post is not None:
+            self._patch += 1
+            self._rc = 1
+
         self._alpha = self._beta = self._post = self._dev = 0
 
     def bump_post(self) -> None:
