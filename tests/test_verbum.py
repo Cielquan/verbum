@@ -128,3 +128,48 @@ class TestParsing:
         """Test identifier with 0 are invalid."""
         with pytest.raises(ValueError, match=r"0 is not a valid [a-z]{2,5} counter"):
             verbum.Version(version_str)
+
+
+class TestReprAndStr:
+    """Test __repr__ and __str__ methods of ``Verson``."""
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            "1.1.1",
+            "12.1.1",
+            "1.12.1",
+            "1.1.12",
+            "1.1.1a1",
+            "1.1.1b1",
+            "1.1.1rc1",
+            "1.1.1.post1",
+            "1.1.1.dev1",
+            "1.1.1rc1.post1.dev1",
+        ],
+    )
+    def test_str_is_equal_to_input(version_str: str) -> None:
+        """Test __str__ is equal to the input string, if not bumped."""
+        result = str(verbum.Version(version_str))
+
+        assert result == version_str
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        ("version_str", "repr_str"),
+        [
+            ("1.1.1", "major=1 minor=1 patch=1 pre=False post=False dev=False"),
+            ("1.1.1a1", "major=1 minor=1 patch=1 pre=alpha1 post=False dev=False"),
+            ("1.1.1b1", "major=1 minor=1 patch=1 pre=beta1 post=False dev=False"),
+            ("1.1.1rc1", "major=1 minor=1 patch=1 pre=rc1 post=False dev=False"),
+            ("1.1.1.post1", "major=1 minor=1 patch=1 pre=False post=1 dev=False"),
+            ("1.1.1.dev1", "major=1 minor=1 patch=1 pre=False post=False dev=1"),
+            ("1.1.1rc1.post1.dev1", "major=1 minor=1 patch=1 pre=rc1 post=1 dev=1"),
+        ],
+    )
+    def test_repr(version_str: str, repr_str: str) -> None:
+        """Test __repr__."""
+        result = repr(verbum.Version(version_str))
+
+        assert result == repr_str
