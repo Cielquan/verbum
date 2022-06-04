@@ -113,7 +113,7 @@ class Version:  # pylint: disable=too-many-instance-attributes
             f"patch={self._patch} "
             f"pre={pre or False} "
             f"post={self._post or False} "
-            f"dev={self._dev or False} "
+            f"dev={self._dev or False}"
         )
 
     def __str__(self) -> str:
