@@ -5,7 +5,7 @@ from verbum import verbum
 
 
 class TestParsing:
-    """Test parsing of version string."""
+    """Test parsing of version string with ``Verson``."""
 
     @staticmethod
     @pytest.mark.parametrize(
