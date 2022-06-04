@@ -159,13 +159,13 @@ class TestReprAndStr:
     @pytest.mark.parametrize(
         ("version_str", "repr_str"),
         [
-            ("1.1.1", "major=1 minor=1 patch=1 pre=False post=False dev=False"),
-            ("1.1.1a1", "major=1 minor=1 patch=1 pre=alpha1 post=False dev=False"),
-            ("1.1.1b1", "major=1 minor=1 patch=1 pre=beta1 post=False dev=False"),
-            ("1.1.1rc1", "major=1 minor=1 patch=1 pre=rc1 post=False dev=False"),
-            ("1.1.1.post1", "major=1 minor=1 patch=1 pre=False post=1 dev=False"),
-            ("1.1.1.dev1", "major=1 minor=1 patch=1 pre=False post=False dev=1"),
-            ("1.1.1rc1.post1.dev1", "major=1 minor=1 patch=1 pre=rc1 post=1 dev=1"),
+            ("1.1.1", "Version <major=1 minor=1 patch=1 pre=False post=False dev=False>"),
+            ("1.1.1a1", "Version <major=1 minor=1 patch=1 pre=alpha1 post=False dev=False>"),
+            ("1.1.1b1", "Version <major=1 minor=1 patch=1 pre=beta1 post=False dev=False>"),
+            ("1.1.1rc1", "Version <major=1 minor=1 patch=1 pre=rc1 post=False dev=False>"),
+            ("1.1.1.post1", "Version <major=1 minor=1 patch=1 pre=False post=1 dev=False>"),
+            ("1.1.1.dev1", "Version <major=1 minor=1 patch=1 pre=False post=False dev=1>"),
+            ("1.1.1rc1.post1.dev1", "Version <major=1 minor=1 patch=1 pre=rc1 post=1 dev=1>"),
         ],
     )
     def test_repr(version_str: str, repr_str: str) -> None:
