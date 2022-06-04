@@ -332,6 +332,29 @@ class TestBumping:
 
     @staticmethod
     @pytest.mark.parametrize(
+        ("version_str", "result_str"),
+        [
+            ("1.1.1", "1.1.1.post1"),
+            ("1.1.1a1", "1.1.1a1.post1"),
+            ("1.1.1b1", "1.1.1b1.post1"),
+            ("1.1.1rc1", "1.1.1rc1.post1"),
+            ("1.1.1.post1", "1.1.1.post2"),
+            ("1.1.1.dev1", "1.1.1.post1"),
+            ("1.1.1a1.post1.dev1", "1.1.1a1.post2"),
+            ("1.1.1b1.post1.dev1", "1.1.1b1.post2"),
+            ("1.1.1rc1.post1.dev1", "1.1.1rc1.post2"),
+        ],
+    )
+    def test_post_bump(version_str: str, result_str: str) -> None:
+        """Test post version bump."""
+        version = verbum.Version(version_str)
+
+        version.bump_post()  # act
+
+        assert str(version) == result_str
+
+    @staticmethod
+    @pytest.mark.parametrize(
         ("bump_type", "result_str"),
         [
             (verbum.BumpType.MAJOR, "2.0.0"),
