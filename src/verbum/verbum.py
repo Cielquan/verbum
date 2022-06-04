@@ -101,9 +101,9 @@ class Version:  # pylint: disable=too-many-instance-attributes
         """Show the version's components."""
         pre = ""
         if self._alpha:
-            pre = f"a{self._alpha}"
+            pre = f"alpha{self._alpha}"
         if self._beta:
-            pre = f"b{self._beta}"
+            pre = f"beta{self._beta}"
         if self._rc:
             pre = f"rc{self._rc}"
 
