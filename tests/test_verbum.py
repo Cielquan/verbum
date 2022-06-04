@@ -173,3 +173,201 @@ class TestReprAndStr:
         result = repr(verbum.Version(version_str))
 
         assert result == repr_str
+
+
+class TestBumping:
+    """Test different bumping methods."""
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            "1.1.1",
+            "1.1.1a1",
+            "1.1.1b1",
+            "1.1.1rc1",
+            "1.1.1.post1",
+            "1.1.1.dev1",
+            "1.1.1rc1.post1.dev1",
+        ],
+    )
+    def test_major_bump(version_str: str) -> None:
+        """Test major version bump."""
+        version = verbum.Version(version_str)
+
+        version.bump_major()  # act
+
+        assert str(version) == "2.0.0"
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            "1.1.1",
+            "1.1.1a1",
+            "1.1.1b1",
+            "1.1.1rc1",
+            "1.1.1.post1",
+            "1.1.1.dev1",
+            "1.1.1rc1.post1.dev1",
+        ],
+    )
+    def test_minor_bump(version_str: str) -> None:
+        """Test minor version bump."""
+        version = verbum.Version(version_str)
+
+        version.bump_minor()  # act
+
+        assert str(version) == "1.2.0"
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            "1.1.1",
+            "1.1.1a1",
+            "1.1.1b1",
+            "1.1.1rc1",
+            "1.1.1.post1",
+            "1.1.1.dev1",
+            "1.1.1rc1.post1.dev1",
+        ],
+    )
+    def test_patch_bump(version_str: str) -> None:
+        """Test patch version bump."""
+        version = verbum.Version(version_str)
+
+        version.bump_patch()  # act
+
+        assert str(version) == "1.1.2"
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        ("version_str", "result_str"),
+        [
+            ("1.1.1", "1.1.1a1"),
+            ("1.1.1a1", "1.1.1a2"),
+            ("1.1.1.post1", "1.1.2a1"),
+            ("1.1.1.dev1", "1.1.1a1"),
+            ("1.1.1a1.post1.dev1", "1.1.2a1"),
+        ],
+    )
+    def test_alpha_bump(version_str: str, result_str: str) -> None:
+        """Test alpha version bump."""
+        version = verbum.Version(version_str)
+
+        version.bump_alpha()  # act
+
+        assert str(version) == result_str
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        ["1.1.1b1", "1.1.1rc1", "1.1.1rc1.post1.dev1"],
+    )
+    def test_invalid_alpha_bump(version_str: str) -> None:
+        """Test alpha version bump."""
+        version = verbum.Version(version_str)
+
+        with pytest.raises(
+            verbum.BumpError, match=r"Cannot bump 'alpha' version on a '(beta|rc)' release"
+        ):
+            version.bump_alpha()
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        ("version_str", "result_str"),
+        [
+            ("1.1.1", "1.1.1b1"),
+            ("1.1.1a1", "1.1.1b1"),
+            ("1.1.1b1", "1.1.1b2"),
+            ("1.1.1.post1", "1.1.2b1"),
+            ("1.1.1.dev1", "1.1.1b1"),
+            ("1.1.1a1.post1.dev1", "1.1.2b1"),
+            ("1.1.1b1.post1.dev1", "1.1.2b1"),
+        ],
+    )
+    def test_beta_bump(version_str: str, result_str: str) -> None:
+        """Test beta version bump."""
+        version = verbum.Version(version_str)
+
+        version.bump_beta()  # act
+
+        assert str(version) == result_str
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        ["1.1.1rc1", "1.1.1rc1.post1.dev1"],
+    )
+    def test_invalid_beta_bump(version_str: str) -> None:
+        """Test beta version bump."""
+        version = verbum.Version(version_str)
+
+        with pytest.raises(verbum.BumpError, match=r"Cannot bump 'beta' version on a 'rc' release"):
+            version.bump_beta()
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        ("version_str", "result_str"),
+        [
+            ("1.1.1", "1.1.1rc1"),
+            ("1.1.1a1", "1.1.1rc1"),
+            ("1.1.1b1", "1.1.1rc1"),
+            ("1.1.1rc1", "1.1.1rc2"),
+            ("1.1.1.post1", "1.1.2rc1"),
+            ("1.1.1.dev1", "1.1.1rc1"),
+            ("1.1.1a1.post1.dev1", "1.1.2rc1"),
+            ("1.1.1b1.post1.dev1", "1.1.2rc1"),
+            ("1.1.1rc1.post1.dev1", "1.1.2rc1"),
+        ],
+    )
+    def test_rc_bump(version_str: str, result_str: str) -> None:
+        """Test rc version bump."""
+        version = verbum.Version(version_str)
+
+        version.bump_rc()  # act
+
+        assert str(version) == result_str
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        ("bump_type", "result_str"),
+        [
+            (verbum.BumpType.MAJOR, "2.0.0"),
+            (verbum.BumpType.MINOR, "1.2.0"),
+            (verbum.BumpType.PATCH, "1.1.2"),
+            (verbum.BumpType.ALPHA, "1.1.1a1"),
+            (verbum.BumpType.BETA, "1.1.1b1"),
+            (verbum.BumpType.RC, "1.1.1rc1"),
+            (verbum.BumpType.POST, "1.1.1.post1"),
+            (verbum.BumpType.DEV, "1.1.1.dev1"),
+        ],
+    )
+    def test_bump_by_type(bump_type: verbum.BumpType, result_str: str) -> None:
+        """Test ``bump_version_by_type`` method."""
+        version = verbum.Version("1.1.1")
+
+        version.bump_version_by_type(bump_type)  # act
+
+        assert str(version) == result_str
+
+
+@pytest.mark.parametrize(
+    ("bump_type", "result_str"),
+    [
+        (verbum.BumpType.MAJOR, "2.0.0"),
+        (verbum.BumpType.MINOR, "1.2.0"),
+        (verbum.BumpType.PATCH, "1.1.2"),
+        (verbum.BumpType.ALPHA, "1.1.1a1"),
+        (verbum.BumpType.BETA, "1.1.1b1"),
+        (verbum.BumpType.RC, "1.1.1rc1"),
+        (verbum.BumpType.POST, "1.1.1.post1"),
+        (verbum.BumpType.DEV, "1.1.1.dev1"),
+    ],
+)
+def test_version_bump_function(bump_type: verbum.BumpType, result_str: str) -> None:
+    """Test ``bump_version`` function."""
+    result = verbum.bump_version("1.1.1", bump_type)
+
+    assert result == result_str
