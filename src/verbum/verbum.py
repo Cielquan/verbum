@@ -241,6 +241,11 @@ class Version:  # pylint: disable=too-many-instance-attributes
 
         if self._beta is not None:
             self._beta += 1
+            self._post = 0
+            return
+
+        if self._alpha is not None:
+            self._beta = 1
             self._alpha = self._post = 0
             return
 
@@ -272,6 +277,11 @@ class Version:  # pylint: disable=too-many-instance-attributes
         """
         if self._rc is not None:
             self._rc += 1
+            self._post = 0
+            return
+
+        if self._alpha is not None or self._beta is not None:
+            self._rc = 1
             self._alpha = self._beta = self._post = 0
             return
 
