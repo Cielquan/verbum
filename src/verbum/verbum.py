@@ -307,11 +307,7 @@ class Version:  # pylint: disable=too-many-instance-attributes
         - set the rc version to one
         - drop alpha-, beta-, and post-release versions
         """
-        if self._post is not None:
-            self._post += 1
-            return
-
-        self._post = 1
+        self._post = (self._post or 0) + 1
 
     def make_final_release(self) -> None:
         """Drop pre-release segments.
