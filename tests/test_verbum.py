@@ -48,6 +48,12 @@ class TestParsing:
                 ".rc1",
                 "_rc1",
                 "c1",
+                "a1b1",
+                "a1rc1",
+                "b1a1",
+                "b1rc1",
+                "rc1a1",
+                "rc1b1",
             ]
         ],
     )
@@ -73,9 +79,9 @@ class TestParsing:
     @pytest.mark.parametrize(
         "version_str",
         [
-            f"{v}{pre}"
+            f"{v}{post}"
             for v in ["1.1.1", "12.1.1", "1.12.1", "1.1.12"]
-            for pre in ["post1", "-post1", "_post1"]
+            for post in ["post1", "-post1", "_post1"]
         ],
     )
     def test_parsing_invalid_post_release(version_str: str) -> None:
@@ -98,35 +104,195 @@ class TestParsing:
         [
             f"{v}{pre}"
             for v in ["1.1.1", "12.1.1", "1.12.1", "1.1.12"]
-            for pre in ["dev1", "-dev1", "_dev1"]
+            for pre in ["a0", "b0", "rc0", ".post0"]
         ],
     )
-    def test_parsing_invalid_dev_release(version_str: str) -> None:
-        """Test invalid dev-releases."""
+    def test_parsing_identifier_with_0(version_str: str) -> None:
+        """Test identifier with 0 are invalid."""
+        with pytest.raises(ValueError, match=r"0 is not a valid [a-z]{2,5} counter"):
+            verbum.Version(version_str)
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            f"{v}{pre}{post}"
+            for v in [
+                "1.1.1.1",
+                "12.1.1.1",
+                "1.12.1.1",
+                "1.1.12.1",
+                "1.1.1.12",
+                "1.1",
+                "12.1",
+                "1.12",
+            ]
+            for pre in ["", "a1", "b1", "rc1"]
+            for post in ["", ".post1"]
+        ],
+    )
+    def test_parsing_composit_versions_with_invalid_versions(version_str: str) -> None:
+        """Test invalid composit versions."""
         with pytest.raises(ValueError, match=f"Unparsable version: {version_str}"):
             verbum.Version(version_str)
 
     @staticmethod
     @pytest.mark.parametrize(
         "version_str",
-        [f"{v}.dev1" for v in ["1.1.1", "12.1.1", "1.12.1", "1.1.12"]],
+        [
+            f"{v}{pre}{post}"
+            for v in ["1.1.1", "12.1.1", "1.12.1", "1.1.12"]
+            for pre in [
+                "-a1",
+                ".a1",
+                "_a1",
+                "alpha1",
+                "-b1",
+                ".b1",
+                "_b1",
+                "beta1",
+                "-rc1",
+                ".rc1",
+                "_rc1",
+                "c1",
+                "a1b1",
+                "a1rc1",
+                "b1a1",
+                "b1rc1",
+                "rc1a1",
+                "rc1b1",
+                "a0",
+                "b0",
+                "rc0",
+            ]
+            for post in ["", ".post1"]
+        ],
     )
-    def test_parsing_valid_dev_release(version_str: str) -> None:
-        """Test valid dev-releases."""
-        verbum.Version(version_str)  # act
+    def test_parsing_composit_versions_with_invalid_pre_releases(version_str: str) -> None:
+        """Test invalid composit versions."""
+        with pytest.raises(ValueError, match=r"Unparsable version|0 is not a valid"):
+            verbum.Version(version_str)
 
     @staticmethod
     @pytest.mark.parametrize(
         "version_str",
         [
-            f"{v}{pre}"
+            f"{v}{pre}{post}"
             for v in ["1.1.1", "12.1.1", "1.12.1", "1.1.12"]
-            for pre in ["a0", "b0", "rc0", ".post0", ".dev0"]
+            for pre in ["", "a1", "b1", "rc1"]
+            for post in ["post1", "-post1", "_post1", ".post0"]
         ],
     )
-    def test_parsing_identifier_with_0(version_str: str) -> None:
-        """Test identifier with 0 are invalid."""
-        with pytest.raises(ValueError, match=r"0 is not a valid [a-z]{2,5} counter"):
+    def test_parsing_composit_versions_with_invalid_post_releases(version_str: str) -> None:
+        """Test invalid composit versions."""
+        with pytest.raises(ValueError, match=r"Unparsable version|0 is not a valid"):
+            verbum.Version(version_str)
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            f"{v}{pre}{post}"
+            for v in ["1.1.1", "12.1.1", "1.12.1", "1.1.12"]
+            for pre in [
+                "-a1",
+                ".a1",
+                "_a1",
+                "alpha1",
+                "-b1",
+                ".b1",
+                "_b1",
+                "beta1",
+                "-rc1",
+                ".rc1",
+                "_rc1",
+                "c1",
+                "a1b1",
+                "a1rc1",
+                "b1a1",
+                "b1rc1",
+                "rc1a1",
+                "rc1b1",
+                "a0",
+                "b0",
+                "rc0",
+            ]
+            for post in ["post1", "-post1", "_post1", ".post0"]
+        ],
+    )
+    def test_parsing_composit_versions_with_only_valid_version(version_str: str) -> None:
+        """Test invalid composit versions."""
+        with pytest.raises(ValueError, match=r"Unparsable version|0 is not a valid"):
+            verbum.Version(version_str)
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            f"{v}{pre}{post}"
+            for v in [
+                "1.1.1.1",
+                "12.1.1.1",
+                "1.12.1.1",
+                "1.1.12.1",
+                "1.1.1.12",
+                "1.1",
+                "12.1",
+                "1.12",
+            ]
+            for pre in ["", "a1", "b1", "rc1"]
+            for post in ["post1", "-post1", "_post1", ".post0"]
+        ],
+    )
+    def test_parsing_composit_versions_with_only_valid_pre_releases(version_str: str) -> None:
+        """Test invalid composit versions."""
+        with pytest.raises(ValueError, match=r"Unparsable version|0 is not a valid"):
+            verbum.Version(version_str)
+
+    @staticmethod
+    @pytest.mark.parametrize(
+        "version_str",
+        [
+            f"{v}{pre}{post}"
+            for v in [
+                "1.1.1.1",
+                "12.1.1.1",
+                "1.12.1.1",
+                "1.1.12.1",
+                "1.1.1.12",
+                "1.1",
+                "12.1",
+                "1.12",
+            ]
+            for pre in [
+                "-a1",
+                ".a1",
+                "_a1",
+                "alpha1",
+                "-b1",
+                ".b1",
+                "_b1",
+                "beta1",
+                "-rc1",
+                ".rc1",
+                "_rc1",
+                "c1",
+                "a1b1",
+                "a1rc1",
+                "b1a1",
+                "b1rc1",
+                "rc1a1",
+                "rc1b1",
+                "a0",
+                "b0",
+                "rc0",
+            ]
+            for post in ["", ".post1"]
+        ],
+    )
+    def test_parsing_composit_versions_with_only_valid_post_releases(version_str: str) -> None:
+        """Test invalid composit versions."""
+        with pytest.raises(ValueError, match=r"Unparsable version|0 is not a valid"):
             verbum.Version(version_str)
 
 
