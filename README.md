@@ -23,7 +23,7 @@ specified in [PEP440](https://peps.python.org/pep-0440/).
 
 Version strings output by `bump_version` are [PEP440](https://peps.python.org/pep-0440/) compliant.
 
-### Ruleset
+### Ruleset on top of PEP440
 
 1. Three version numbers are mandatory: `X.Y.Z`.
 2. A leading forth number (epoch) is forbidden.
@@ -34,16 +34,10 @@ Version strings output by `bump_version` are [PEP440](https://peps.python.org/pe
    - `release-candidate` -> `rc`
 4. Other variante as `rc` are not supported for release-candidates.
 5. Pre-release identifier must follow the scheme `{a|b|rc}N` where `N` is an interger.
-6. Pre-release identifier must come behind the third version number.
-7. Post-release identifier must follow the scheme `.postN` where `N` is an interger.
-8. Post-release identifier must come behind the third version number or an optional pre-release
-   identifier.
-9. Dev-release identifier must follow the scheme `.devN` where `N` is an interger.
-10. Dev-release identifier must come last.
-11. Pre-release, post-release and dev-release counter must start with 1 not 0.
-    A 0 is interpreted as not set. This means e.g. bumping a post-release on this `1.1.1rc0`
-    would result in `1.1.1.post1`.
-12. Addition identifiers or separators are forbidden.
+6. Pre-release, post-release and dev-release counter must start with 1 not 0.
+   A 0 is interpreted as not set. This means e.g. bumping a post-release on this `1.1.1rc0`
+   would result in `1.1.1.post1`.
+7. Addition identifiers or separators are forbidden.
 
 ### Examples
 
