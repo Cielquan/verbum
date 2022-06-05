@@ -19,9 +19,18 @@ NOTE: please use them in this order.
 
 [diff v1.0.0...main](https://github.com/cielquan/verbum/compare/v1.0.0...main)
 
+### BREAKING CHANGES
+
+- Big rework
+
 ### Documentation
 
 - Add a changelog
+- Improve docstrings
+
+### Miscellaneous
+
+- Improve and add more tests
 
 ## [v1.0.0 (2022-06-04)](https://pypi.org/project/verbum/v1.0.0/)
 
