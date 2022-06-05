@@ -20,6 +20,14 @@ class BumpType(enum.Enum):
     POST = "post"
 
 
+class MainVersionNumber(enum.Enum):
+    """Supported main version numbers."""
+
+    MAJOR = "major"
+    MINOR = "minor"
+    PATCH = "patch"
+
+
 VERVSION_RE = re.compile(
     r"""
         (?x)
@@ -122,25 +130,63 @@ class Version:  # pylint: disable=too-many-instance-attributes
         return new_version
 
     def bump_major(self) -> None:
-        """Bump the major version."""
+        """Bump the major version.
+
+        What happens:
+
+        - the major version is incremented by one
+        - the minor and patch versions are reset to 0
+        - all post- and pre-release segments are dropped
+        """
         self._major += 1
         self._minor = self._patch = self._alpha = self._beta = self._rc = self._post = 0
 
     def bump_minor(self) -> None:
-        """Bump the minor version."""
+        """Bump the minor version.
+
+        What happens:
+
+        - the major version stays unchanged
+        - the minor version is incremented by one
+        - the patch version is reset to 0
+        - all post- and pre-release segments are dropped
+        """
         self._minor += 1
         self._patch = self._alpha = self._beta = self._rc = self._post = 0
 
     def bump_patch(self) -> None:
-        """Bump the patch version."""
+        """Bump the patch version.
+
+        What happens:
+
+        - the major and minor versions stay unchanged
+        - the patch version is incremented by one
+        - all post- and pre-release segments are dropped
+        """
         self._patch += 1
         self._alpha = self._beta = self._rc = self._post = 0
 
-    def bump_alpha(self) -> None:
-        """Bum the alpha version.
+    def bump_alpha(
+        self, increase_if_not_alpha: MainVersionNumber = MainVersionNumber.PATCH
+    ) -> None:
+        """Bump the alpha version.
 
-        :raises BumpError: if the version has a beta identifier
-        :raises BumpError: if the version has a release-candidate identifier
+        What happens:
+
+        If the version identifier already has an alpha segment:
+        - increment the alpha version by one
+        - drop post-release segment
+
+        If the version identifier does not already have an alpha segment:
+        - bump the specified main version by calling the respective ``bump_*`` method
+        - set the alpha version to one
+        - drop post-release segment
+
+        :raises BumpError: if the version has a beta segment
+        :raises BumpError: if the version has a release-candidate segment
+        :param increase_if_not_alpha: Main version number to increment if not already an alpha
+            version;
+            defaults to ``MainVersionNumber.PATCH``
         """
         if self._beta != 0 and self._beta is not None:
             raise BumpError("Cannot bump 'alpha' version on a 'beta' release.")
@@ -148,58 +194,123 @@ class Version:  # pylint: disable=too-many-instance-attributes
         if self._rc != 0 and self._rc is not None:
             raise BumpError("Cannot bump 'alpha' version on a 'rc' release.")
 
-        if self._alpha is None:
-            self._alpha = 0
-        self._alpha += 1
+        if self._alpha is not None:
+            self._alpha += 1
+            self._post = 0
+            return
 
-        if self._post != 0 and self._post is not None:
-            self._patch += 1
-            self._alpha = 1
+        match increase_if_not_alpha:
+            case MainVersionNumber.MAJOR:
+                self.bump_major()
+            case MainVersionNumber.MINOR:
+                self.bump_minor()
+            case MainVersionNumber.PATCH:
+                self.bump_patch()
+        self._alpha = 1
 
-        self._post = 0
-
-    def bump_beta(self) -> None:
+    def bump_beta(self, increase_if_not_beta: MainVersionNumber = MainVersionNumber.PATCH) -> None:
         """Bum the beta version.
 
-        :raises BumpError: if the version has a release-candidate identifier
+        What happens:
+
+        If the version identifier already has a beta segment:
+        - increment the beta version by one
+        - drop post-release segment
+
+        If the version identifier does not already have a beta segment:
+        - bump the specified main version by calling the respective ``bump_*`` method
+        - set the beta version to one
+        - drop alpha- and post-release versions
+
+        :raises BumpError: if the version has a release-candidate segment
+        :param increase_if_not_beta: Main version number to increment if not already a beta version;
+            defaults to ``MainVersionNumber.PATCH``
         """
         if self._rc != 0 and self._rc is not None:
             raise BumpError("Cannot bump 'beta' version on a 'rc' release.")
 
-        if self._beta is None:
-            self._beta = 0
-        self._beta += 1
+        if self._beta is not None:
+            self._beta += 1
+            self._alpha = self._post = 0
+            return
 
-        if self._post != 0 and self._post is not None:
-            self._patch += 1
-            self._beta = 1
+        match increase_if_not_beta:
+            case MainVersionNumber.MAJOR:
+                self.bump_major()
+            case MainVersionNumber.MINOR:
+                self.bump_minor()
+            case MainVersionNumber.PATCH:
+                self.bump_patch()
+        self._beta = 1
 
-        self._alpha = self._post = 0
+    def bump_rc(self, increase_if_not_rc: MainVersionNumber = MainVersionNumber.PATCH) -> None:
+        """Bump the release-candidate version.
 
-    def bump_rc(self) -> None:
-        """Bump the release-candidate version."""
-        if self._rc is None:
-            self._rc = 0
-        self._rc += 1
+        What happens:
 
-        if self._post != 0 and self._post is not None:
-            self._patch += 1
-            self._rc = 1
+        If the version identifier already has a rc segment:
+        - increment the rc version by one
+        - drop post-release segment
 
-        self._alpha = self._beta = self._post = 0
+        If the version identifier does not already have a rc segment:
+        - bump the specified main version by calling the respective ``bump_*`` method
+        - set the rc version to one
+        - drop alpha-, beta- and post-release versions
+
+        :param increase_if_not_rc: Main version number to increment if not already a rc version;
+            defaults to ``MainVersionNumber.PATCH``
+        """
+        if self._rc is not None:
+            self._rc += 1
+            self._alpha = self._beta = self._post = 0
+            return
+
+        match increase_if_not_rc:
+            case MainVersionNumber.MAJOR:
+                self.bump_major()
+            case MainVersionNumber.MINOR:
+                self.bump_minor()
+            case MainVersionNumber.PATCH:
+                self.bump_patch()
+        self._rc = 1
 
     def bump_post(self) -> None:
-        """Bump the post version."""
-        if self._post is None:
-            self._post = 0
-        self._post += 1
+        """Bump the post version.
 
-    def bump_version_by_type(self, increase_type: BumpType) -> None:
+        What happens:
+
+        If the version identifier already has a post-release segment:
+        - increment the post-release version by one
+
+        If the version identifier does not already have a post-release segment:
+        - bump the specified main version by calling the respective ``bump_*`` method
+        - set the rc version to one
+        - drop alpha-, beta-, and post-release versions
+        """
+        if self._post is not None:
+            self._post += 1
+            return
+
+        self._post = 1
+
+    def make_final_release(self) -> None:
+        """Drop pre-release segments.
+
+        :raises BumpError: if the version is a final release with a post-release segment
+        """
+        if self._alpha is None and self._beta is None and self._rc is None:
+            if self._post is not None:
+                raise BumpError("Cannot make final release of a post-release from a final release.")
+            raise BumpError("Cannot make final release of a final release.")
+
+        self._alpha = self._beta = self._rc = self._post = 0
+
+    def bump_version_by_type(self, increment_type: BumpType) -> None:
         """Bump the version by the specified type.
 
-        :param increase_type: Version type to bump
+        :param increment_type: Version type to bump
         """
-        match increase_type:
+        match increment_type:
             case BumpType.MAJOR:
                 self.bump_major()
             case BumpType.MINOR:
@@ -216,13 +327,26 @@ class Version:  # pylint: disable=too-many-instance-attributes
                 self.bump_post()
 
 
-def bump_version(version: str, increase_type: BumpType) -> str:
+def bump_version(version: str, increment_type: BumpType) -> str:
     """Bump a version string by a given type.
 
     :param version: Version string to bump
-    :param increase_type: Version type to bump
+    :param increment_type: Version type to bump
     :return: Bumped version string
     """
     _version = Version(version)
-    _version.bump_version_by_type(increase_type)
+    _version.bump_version_by_type(
+        increment_type,
+    )
+    return str(_version)
+
+
+def make_final_release(version: str) -> str:
+    """Drop pre-release segments.
+
+    :param version: Version string to bump
+    :return: Bumped version string
+    """
+    _version = Version(version)
+    _version.make_final_release()
     return str(_version)
