@@ -34,7 +34,7 @@ Version strings output by `bump_version` are [PEP440](https://peps.python.org/pe
    - `release-candidate` -> `rc`
 4. Other variante as `rc` are not supported for release-candidates.
 5. Pre-release identifier must follow the scheme `{a|b|rc}N` where `N` is an interger.
-6. Pre-release, post-release and dev-release counter must start with 1 not 0.
+6. Pre-release and post-release counter must start with 1 not 0.
    A 0 is interpreted as not set. This means e.g. bumping a post-release on this `1.1.1rc0`
    would result in `1.1.1.post1`.
 7. Addition identifiers or separators are forbidden.
@@ -51,12 +51,4 @@ Version strings output by `bump_version` are [PEP440](https://peps.python.org/pe
 1.2.3a1.post1
 1.2.3b1.post1
 1.2.3rc1.post1
-
-1.2.3.dev1
-1.2.3a1.dev1
-1.2.3b1.dev1
-1.2.3rc1.dev1
-1.2.3.post1.dev1
-
-1.2.3rc1.post1.dev1
 ```

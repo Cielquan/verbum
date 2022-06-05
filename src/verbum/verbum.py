@@ -18,7 +18,6 @@ class BumpType(enum.Enum):
     BETA = "beta"
     RC = "rc"
     POST = "post"
-    DEV = "dev"
 
 
 VERVSION_RE = re.compile(
@@ -30,7 +29,6 @@ VERVSION_RE = re.compile(
         \.(?P<patch>\d+)
         (?:a(?P<alpha>\d+)|b(?P<beta>\d+)|rc(?P<rc>\d+))?
         (?:\.post(?P<post>\d+))?
-        (?:\.dev(?P<dev>\d+))?
         $
     """
 )
@@ -89,14 +87,6 @@ class Version:  # pylint: disable=too-many-instance-attributes
             case _:
                 self._post = int(version_parts.group("post"))
 
-        match version_parts.group("dev"):
-            case None:
-                self._dev = None
-            case "0":
-                raise ValueError("0 is not a valid dev counter.")
-            case _:
-                self._dev = int(version_parts.group("dev"))
-
     def __repr__(self) -> str:
         """Show the version's components."""
         pre = ""
@@ -113,8 +103,7 @@ class Version:  # pylint: disable=too-many-instance-attributes
             f"minor={self._minor} "
             f"patch={self._patch} "
             f"pre={pre or False} "
-            f"post={self._post or False} "
-            f"dev={self._dev or False}"
+            f"post={self._post or False}"
             ">"
         )
 
@@ -129,25 +118,23 @@ class Version:  # pylint: disable=too-many-instance-attributes
             new_version += f"rc{self._rc}"
         if self._post != 0 and self._post is not None:
             new_version += f".post{self._post}"
-        if self._dev != 0 and self._dev is not None:
-            new_version += f".dev{self._dev}"
 
         return new_version
 
     def bump_major(self) -> None:
         """Bump the major version."""
         self._major += 1
-        self._minor = self._patch = self._alpha = self._beta = self._rc = self._post = self._dev = 0
+        self._minor = self._patch = self._alpha = self._beta = self._rc = self._post = 0
 
     def bump_minor(self) -> None:
         """Bump the minor version."""
         self._minor += 1
-        self._patch = self._alpha = self._beta = self._rc = self._post = self._dev = 0
+        self._patch = self._alpha = self._beta = self._rc = self._post = 0
 
     def bump_patch(self) -> None:
         """Bump the patch version."""
         self._patch += 1
-        self._alpha = self._beta = self._rc = self._post = self._dev = 0
+        self._alpha = self._beta = self._rc = self._post = 0
 
     def bump_alpha(self) -> None:
         """Bum the alpha version.
@@ -169,7 +156,7 @@ class Version:  # pylint: disable=too-many-instance-attributes
             self._patch += 1
             self._alpha = 1
 
-        self._post = self._dev = 0
+        self._post = 0
 
     def bump_beta(self) -> None:
         """Bum the beta version.
@@ -187,7 +174,7 @@ class Version:  # pylint: disable=too-many-instance-attributes
             self._patch += 1
             self._beta = 1
 
-        self._alpha = self._post = self._dev = 0
+        self._alpha = self._post = 0
 
     def bump_rc(self) -> None:
         """Bump the release-candidate version."""
@@ -199,20 +186,13 @@ class Version:  # pylint: disable=too-many-instance-attributes
             self._patch += 1
             self._rc = 1
 
-        self._alpha = self._beta = self._post = self._dev = 0
+        self._alpha = self._beta = self._post = 0
 
     def bump_post(self) -> None:
         """Bump the post version."""
         if self._post is None:
             self._post = 0
         self._post += 1
-        self._dev = 0
-
-    def bump_dev(self) -> None:
-        """Bump the dev version."""
-        if self._dev is None:
-            self._dev = 0
-        self._dev += 1
 
     def bump_version_by_type(self, increase_type: BumpType) -> None:
         """Bump the version by the specified type.
@@ -234,8 +214,6 @@ class Version:  # pylint: disable=too-many-instance-attributes
                 self.bump_rc()
             case BumpType.POST:
                 self.bump_post()
-            case BumpType.DEV:
-                self.bump_dev()
 
 
 def bump_version(version: str, increase_type: BumpType) -> str:
