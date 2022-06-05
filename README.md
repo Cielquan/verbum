@@ -39,7 +39,7 @@ Version strings output by `bump_version` are [PEP440](https://peps.python.org/pe
    would result in `1.1.1.post1`.
 7. Additional identifiers or separators are forbidden.
 
-### Examples
+### Valid examples
 
 ```text
 1.2.3a1
