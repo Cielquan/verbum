@@ -95,6 +95,16 @@ class Version:  # pylint: disable=too-many-instance-attributes
             case _:
                 self._post = int(version_parts.group("post"))
 
+        pre_release_counter = 0
+        if self._alpha is not None:
+            pre_release_counter += 1
+        if self._beta is not None:
+            pre_release_counter += 1
+        if self._rc is not None:
+            pre_release_counter += 1
+        if pre_release_counter > 1:
+            raise ValueError("Version identifier cannot have multiple pre-release segments.")
+
     def __repr__(self) -> str:
         """Show the version's components."""
         pre = ""
