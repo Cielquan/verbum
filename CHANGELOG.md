@@ -17,7 +17,11 @@ NOTE: please use them in this order.
 
 ## Unreleased
 
-[diff v1.0.0...main](https://github.com/cielquan/verbum/compare/v1.0.0...main)
+[diff v2.0.0...main](https://github.com/cielquan/verbum/compare/v1.0.0...main)
+
+## [v2.0.0 (2022-06-05)](https://pypi.org/project/verbum/v2.0.0/)
+
+[diff v1.0.0...v2.0.0](https://github.com/cielquan/verbum/compare/v1.0.0...v2.0.0)
 
 ### BREAKING CHANGES
 
