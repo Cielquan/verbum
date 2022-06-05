@@ -37,7 +37,7 @@ Version strings output by `bump_version` are [PEP440](https://peps.python.org/pe
 6. Pre-release and post-release counter must start with 1 not 0.
    A 0 is interpreted as not set. This means e.g. bumping a post-release on this `1.1.1rc0`
    would result in `1.1.1.post1`.
-7. Addition identifiers or separators are forbidden.
+7. Additional identifiers or separators are forbidden.
 
 ### Examples
 
