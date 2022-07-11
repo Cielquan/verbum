@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: d232077d3bc16dcbaee30b42d35197f8bf337a36  # frozen: v2.37.1
+    rev: d232077d3bc16dcbaee30b42d35197f8bf337a36 # frozen: v2.37.1
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -263,6 +263,6 @@ repos:
 
   # yamllint - yaml linter
   - repo: https://github.com/adrienverge/yamllint
-    rev: a09ad89268e9042349b764084426617da69957d3  # frozen: v1.27.1
+    rev: a09ad89268e9042349b764084426617da69957d3 # frozen: v1.27.1
     hooks:
       - id: yamllint
