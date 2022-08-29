@@ -214,7 +214,7 @@ repos:
 
   # pylint - python linter
   - repo: https://github.com/PyCQA/pylint/
-    rev: 24eaec26f701cf8adddf27ffa8859e0bb5074a89  # frozen: v2.15.0
+    rev: 24eaec26f701cf8adddf27ffa8859e0bb5074a89 # frozen: v2.15.0
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
@@ -226,7 +226,7 @@ repos:
 
   # poetry - python dependency maJSONnagement
   - repo: https://github.com/python-poetry/poetry
-    rev: 3f741f77a2822b6fe0cdf2f27cce2c701e011fc2  # frozen: 1.2.0rc1
+    rev: 3f741f77a2822b6fe0cdf2f27cce2c701e011fc2 # frozen: 1.2.0rc1
     hooks:
       - id: poetry-check
 
