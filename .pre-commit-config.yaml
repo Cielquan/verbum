@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: c1b1c5380dbb12b30ec0d0652df204d21ae003b8  # frozen: v3.2.2
+    rev: c1b1c5380dbb12b30ec0d0652df204d21ae003b8 # frozen: v3.2.2
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -70,7 +70,7 @@ repos:
 
   # black - python formatter
   - repo: https://github.com/psf/black
-    rev: 27d20144a7517594e24a1649451177b2a11284be  # frozen: 22.10.0
+    rev: 27d20144a7517594e24a1649451177b2a11284be # frozen: 22.10.0
     hooks:
       - id: black
         args: ["--safe"]
@@ -88,7 +88,7 @@ repos:
 
   # prettier - multi formatter
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: cafd5506f18eea191804850dacc0a4264772d59d  # frozen: v3.0.0-alpha.4
+    rev: cafd5506f18eea191804850dacc0a4264772d59d # frozen: v3.0.0-alpha.4
     hooks:
       - id: prettier
 
@@ -180,7 +180,7 @@ repos:
 
   # flakeheaven - wrapper for flake8
   - repo: https://github.com/flakeheaven/flakeheaven
-    rev: "4cd049b3b188a32435fa2020f84625b5bd9c53d7"  # frozen: 3.2.1
+    rev: "4cd049b3b188a32435fa2020f84625b5bd9c53d7" # frozen: 3.2.1
     hooks:
       - id: flakeheaven
         types: [python]
@@ -214,7 +214,7 @@ repos:
 
   # pylint - python linter
   - repo: https://github.com/PyCQA/pylint/
-    rev: bb17694867b1668db0cd3ae00c8a960d7f4b9868  # frozen: v2.15.5
+    rev: bb17694867b1668db0cd3ae00c8a960d7f4b9868 # frozen: v2.15.5
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
@@ -263,6 +263,6 @@ repos:
 
   # yamllint - yaml linter
   - repo: https://github.com/adrienverge/yamllint
-    rev: 9cce2940414e9560ae4c8518ddaee2ac1863a4d2  # frozen: v1.28.0
+    rev: 9cce2940414e9560ae4c8518ddaee2ac1863a4d2 # frozen: v1.28.0
     hooks:
       - id: yamllint
