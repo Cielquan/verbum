@@ -20,7 +20,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.10"
 # EXTRA testing
-pytest = { version = ">=6.0", optional = true }
+pytest = { version = ">=7.2", optional = true }
 pytest-cov = {version = ">=3.0", optional = true}
 coverage = {extras = ["toml"], version = ">=6.0", optional = true}
 # TODO:#i# wait for new release
@@ -117,7 +117,6 @@ spelling-private-dict-file = "spelling_dict.txt"
 # -- PYTEST CONFIG --------------------------------------------------------------------
 [tool.pytest.ini_options]
 addopts = "-ra --showlocals"
-mock_use_standalone_module = true
 
 
 # -- COVERAGE CONFIG ------------------------------------------------------------------

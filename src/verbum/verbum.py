@@ -29,8 +29,7 @@ class MainVersionNumber(enum.Enum):
 
 
 VERVSION_RE = re.compile(
-    r"""
-        (?x)
+    r"""(?x)
         ^
         (?P<major>\d+)
         \.(?P<minor>\d+)
