@@ -117,7 +117,6 @@ spelling-private-dict-file = "spelling_dict.txt"
 # -- PYTEST CONFIG --------------------------------------------------------------------
 [tool.pytest.ini_options]
 addopts = "-ra --showlocals"
-mock_use_standalone_module = true
 
 
 # -- COVERAGE CONFIG ------------------------------------------------------------------
