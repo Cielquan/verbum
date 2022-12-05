@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: a19e73372afc7ad8462488148c8ebeb9d82a864a  # frozen: v3.3.0
+    rev: a19e73372afc7ad8462488148c8ebeb9d82a864a # frozen: v3.3.0
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -214,7 +214,7 @@ repos:
 
   # pylint - python linter
   - repo: https://github.com/PyCQA/pylint/
-    rev: 1f84ed912d088a9c2152ad7bc9b1aff0a66f389f  # frozen: v2.15.8
+    rev: 1f84ed912d088a9c2152ad7bc9b1aff0a66f389f # frozen: v2.15.8
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
