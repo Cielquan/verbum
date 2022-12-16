@@ -23,9 +23,7 @@ python = "^3.10"
 pytest = { version = ">=7.2", optional = true }
 pytest-cov = {version = ">=3.0", optional = true}
 coverage = {extras = ["toml"], version = ">=6.0", optional = true}
-# TODO:#i# wait for new release
-# pytest-sugar = { version = ">=0.9.5", optional = true }
-pytest-sugar = { git = "https://github.com/Teemu/pytest-sugar.git", rev = "ee02ada200026f4bfabf2252c6c59b08f5564255", optional = true }
+pytest-sugar = { version = ">=0.9.5", optional = true }
 pytest-randomly = { version = ">=3.0", optional = true }
 
 [tool.poetry.dev-dependencies]
