@@ -246,7 +246,7 @@ repos:
 
   # markdownlint - md file checker
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: e3c981ce9ab04c82884e2bb074e13f0ad755a63d  # frozen: v0.6.0
+    rev: e3c981ce9ab04c82884e2bb074e13f0ad755a63d # frozen: v0.6.0
     hooks:
       - id: markdownlint-cli2
 
