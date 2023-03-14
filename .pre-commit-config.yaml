@@ -214,7 +214,7 @@ repos:
 
   # pylint - python linter
   - repo: https://github.com/PyCQA/pylint/
-    rev: 8e7b809806ef94818ae595d4b654f398a3030dbe # frozen: v2.16.4
+    rev: 2e78c414d24c9819936351c133b3edcad970abaa # frozen: v2.17.0
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
