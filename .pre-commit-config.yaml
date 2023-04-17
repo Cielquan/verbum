@@ -180,7 +180,7 @@ repos:
 
   # flakeheaven - wrapper for flake8
   - repo: https://github.com/flakeheaven/flakeheaven
-    rev: "289c489c9654342dae2ad871527c5951acb2f22d"  # frozen: 3.3.0
+    rev: "289c489c9654342dae2ad871527c5951acb2f22d" # frozen: 3.3.0
     hooks:
       - id: flakeheaven
         types: [python]
