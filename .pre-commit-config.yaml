@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: 1395c21a149988e686aef88be48d52ba0d5752f3 # frozen: v3.4.0
+    rev: 395e8f7b704269e023223a424168b4e5b5a3ac23 # frozen: v3.8.0
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -77,7 +77,7 @@ repos:
 
   # blacken-docs - black for python code in docs (rst/md/tex)
   - repo: https://github.com/asottile/blacken-docs
-    rev: 1238e1d8f03e96a7ed9ad44937ea4348eb6b11b8 # frozen: 1.13.0
+    rev: 4b94add9bc83d772ae5e31a679a18609c1750513 # frozen: 1.14.0
     hooks:
       - id: blacken-docs
         exclude: testing|tests
@@ -226,7 +226,7 @@ repos:
 
   # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: c94fcaa1d73e0c66f221e2e9ffc0d85f3c04e5ed # frozen: 1.4.2
+    rev: 922851ade62d12cd103513b8c1046db0992d6a39 # frozen: 1.5.1
     hooks:
       - id: poetry-check
 
@@ -236,7 +236,7 @@ repos:
 
   # shellscript (via PyPI package)
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: 4bb61ddc1b4175565f8f975fd20d657f00f2bd53 # frozen: v0.9.0.2
+    rev: 375289a39f5708101b1f916eb729e8d6da96993f # frozen: v0.9.0.5
     hooks:
       - id: shellcheck
 
@@ -246,7 +246,7 @@ repos:
 
   # markdownlint - md file checker
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: 22669c403cc8d456394865f16c170c4749c3af11 # frozen: v0.7.1
+    rev: 50b923d7df0876a24adca18cbbca57ddfa7369ad # frozen: v0.8.1
     hooks:
       - id: markdownlint-cli2
 
@@ -263,6 +263,6 @@ repos:
 
   # yamllint - yaml linter
   - repo: https://github.com/adrienverge/yamllint
-    rev: 98f2281f56be5503f3851e74556e1122fc18b2a8 # frozen: v1.31.0
+    rev: b05e028c5881819161d11cb543fd96a30c06cceb # frozen: v1.32.0
     hooks:
       - id: yamllint
