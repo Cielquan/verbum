@@ -70,7 +70,7 @@ repos:
 
   # black - python formatter
   - repo: https://github.com/psf/black
-    rev: 193ee766ca496871f93621d6b58d57a6564ff81b  # frozen: 23.7.0
+    rev: 193ee766ca496871f93621d6b58d57a6564ff81b # frozen: 23.7.0
     hooks:
       - id: black
         args: ["--safe"]
