@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: f838af6848df063c04a2e6c78a2e8ae0e8fb822b  # frozen: v3.11.0
+    rev: f838af6848df063c04a2e6c78a2e8ae0e8fb822b # frozen: v3.11.0
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -246,7 +246,7 @@ repos:
 
   # markdownlint - md file checker
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: ef974bde8375da10f3aa38a1b6ce646a34a23446  # frozen: v0.10.0
+    rev: ef974bde8375da10f3aa38a1b6ce646a34a23446 # frozen: v0.10.0
     hooks:
       - id: markdownlint-cli2
 
