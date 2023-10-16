@@ -27,7 +27,7 @@ repos:
 
   # file checking out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9 # frozen: v4.4.0
+    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # frozen: v4.5.0
     hooks:
       - id: check-case-conflict
       - id: check-shebang-scripts-are-executable
@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: ffb735bf0dc786a3a1e6b08043440b0bdef5bef8 # frozen: v3.13.0
+    rev: 1bbebc88c6925a4e56fd5446b830b12c38c1c24a  # frozen: v3.15.0
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -119,7 +119,7 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9 # frozen: v4.4.0
+    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # frozen: v4.5.0
     hooks:
       - id: end-of-file-fixer
         stages: [commit]
@@ -149,7 +149,7 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9 # frozen: v4.4.0
+    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # frozen: v4.5.0
     hooks:
       - id: check-merge-conflict
       - id: detect-private-key
@@ -160,7 +160,7 @@ repos:
 
   # python specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9 # frozen: v4.4.0
+    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # frozen: v4.5.0
     hooks:
       - id: debug-statements
       - id: fix-encoding-pragma
@@ -214,7 +214,7 @@ repos:
 
   # pylint - python linter
   - repo: https://github.com/PyCQA/pylint/
-    rev: 4a7ad5ea9f1c5a98ccf736578a00554be0da6dc7 # frozen: v3.0.0
+    rev: f2cded41f7f3d4b45236cbe107b366b6caf84bde  # frozen: v3.0.1
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
@@ -256,7 +256,7 @@ repos:
 
   # JSON specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9 # frozen: v4.4.0
+    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # frozen: v4.5.0
     hooks:
       - id: check-toml
       - id: check-yaml
