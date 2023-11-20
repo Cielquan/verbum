@@ -226,7 +226,7 @@ repos:
 
   # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: 2ac338ebdea243e3c512ba25f7768ef79e11adc9 # frozen: 1.7.0
+    rev: 41ef89aac1c244b9592952e5624689909ddadbb7 # frozen: 1.7.1
     hooks:
       - id: poetry-check
 
@@ -246,7 +246,7 @@ repos:
 
   # markdownlint - md file checker
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: ef974bde8375da10f3aa38a1b6ce646a34a23446 # frozen: v0.10.0
+    rev: 8524909c7a86f78a6b915ffafea220a6f3979ba1 # frozen: v0.11.0
     hooks:
       - id: markdownlint-cli2
 
