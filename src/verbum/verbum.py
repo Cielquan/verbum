@@ -1,4 +1,5 @@
 """Bump versions."""
+
 import enum
 import re
 import sys

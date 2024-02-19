@@ -38,7 +38,7 @@ repos:
 
   # safety - python dependency vulnerability checker
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: 3f01891d76160f03e9134ef025fb1eb1d10c85a2  # frozen: v1.3.3
+    rev: 3f01891d76160f03e9134ef025fb1eb1d10c85a2 # frozen: v1.3.3
     hooks:
       - id: python-safety-dependencies-check
         args: ["--disable-telemetry", "--full-report", "--ignore=51457"]
@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: df17dfa3911b81b4a27190b0eea5b1debc7ffa0a  # frozen: v3.15.1
+    rev: df17dfa3911b81b4a27190b0eea5b1debc7ffa0a # frozen: v3.15.1
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -70,7 +70,7 @@ repos:
 
   # black - python formatter
   - repo: https://github.com/psf/black
-    rev: 6fdf8a4af28071ed1d079c01122b34c5d587207a  # frozen: 24.2.0
+    rev: 6fdf8a4af28071ed1d079c01122b34c5d587207a # frozen: 24.2.0
     hooks:
       - id: black
         args: ["--safe"]
@@ -246,7 +246,7 @@ repos:
 
   # markdownlint - md file checker
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: 82c791e94c2e2ab2119437d61c722c8e0c20d6c9  # frozen: v0.12.1
+    rev: 82c791e94c2e2ab2119437d61c722c8e0c20d6c9 # frozen: v0.12.1
     hooks:
       - id: markdownlint-cli2
 
@@ -263,6 +263,6 @@ repos:
 
   # yamllint - yaml linter
   - repo: https://github.com/adrienverge/yamllint
-    rev: 81e9f98ffd059efe8aa9c1b1a42e5cce61b640c6  # frozen: v1.35.1
+    rev: 81e9f98ffd059efe8aa9c1b1a42e5cce61b640c6 # frozen: v1.35.1
     hooks:
       - id: yamllint
