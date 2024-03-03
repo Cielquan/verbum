@@ -41,7 +41,7 @@ repos:
     rev: 3f01891d76160f03e9134ef025fb1eb1d10c85a2 # frozen: v1.3.3
     hooks:
       - id: python-safety-dependencies-check
-        args: ["--disable-telemetry", "--full-report", "--ignore=51457"]
+        args: ["--disable-optional-telemetry", "--full-report", "--ignore=51457"]
         files: pyproject.toml
         exclude: testing
 
