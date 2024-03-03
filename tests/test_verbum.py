@@ -1,4 +1,5 @@
 """Tests for verbum.verbum module."""
+
 import pytest
 
 from verbum import verbum
