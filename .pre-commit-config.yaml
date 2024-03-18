@@ -70,7 +70,7 @@ repos:
 
   # black - python formatter
   - repo: https://github.com/psf/black
-    rev: 552baf822992936134cbd31a38f69c8cfe7c0f05  # frozen: 24.3.0
+    rev: 552baf822992936134cbd31a38f69c8cfe7c0f05 # frozen: 24.3.0
     hooks:
       - id: black
         args: ["--safe"]
@@ -236,7 +236,7 @@ repos:
 
   # shellscript (via PyPI package)
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: a23f6b85d0fdd5bb9d564e2579e678033debbdff  # frozen: v0.10.0.1
+    rev: a23f6b85d0fdd5bb9d564e2579e678033debbdff # frozen: v0.10.0.1
     hooks:
       - id: shellcheck
 
