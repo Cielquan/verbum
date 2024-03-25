@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: 12af25eb252deaaecb6b259df40d01f42e716dc3  # frozen: v3.15.2
+    rev: 12af25eb252deaaecb6b259df40d01f42e716dc3 # frozen: v3.15.2
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
