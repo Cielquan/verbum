@@ -77,7 +77,7 @@ repos:
 
   # blacken-docs - black for python code in docs (rst/md/tex)
   - repo: https://github.com/asottile/blacken-docs
-    rev: 960ead214cd1184149d366c6d27ca6c369ce46b6 # frozen: 1.16.0
+    rev: 4c97c4a0d921007af6fefae92d8447cfbf63720b  # frozen: 1.18.0
     hooks:
       - id: blacken-docs
         exclude: testing|tests
@@ -214,7 +214,7 @@ repos:
 
   # pylint - python linter
   - repo: https://github.com/PyCQA/pylint/
-    rev: 918d2168e15662df90cfb993df100e566f69d418 # frozen: v3.2.3
+    rev: 425ad66da9467bac9074de3f2294f7851cb3320b  # frozen: v3.2.4
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
