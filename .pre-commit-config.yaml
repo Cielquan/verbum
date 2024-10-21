@@ -226,7 +226,7 @@ repos:
 
   # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: 8322ea5e4c20ab182bfb72e80189d2a02941089a # frozen: 1.8.3
+    rev: 8609c684ccd6d868005399a191a2e285e8324b21  # frozen: 1.8.4
     hooks:
       - id: poetry-check
 
