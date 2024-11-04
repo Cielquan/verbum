@@ -57,7 +57,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: 28b9414e6448be4cb61f51220f8cb88c582981a8 # frozen: v3.18.0
+    rev: 19364aa1b2ac289ce75e6bbe93994f7b4b9425f6 # frozen: v3.19.0
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -77,7 +77,7 @@ repos:
 
   # blacken-docs - black for python code in docs (rst/md/tex)
   - repo: https://github.com/asottile/blacken-docs
-    rev: d4e2940d27621c7f20215459be05703947618b7b # frozen: 1.19.0
+    rev: 78a9dcbecf4f755f65d1f3dec556bc249d723600 # frozen: 1.19.1
     hooks:
       - id: blacken-docs
         exclude: testing|tests
@@ -226,7 +226,7 @@ repos:
 
   # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: 8322ea5e4c20ab182bfb72e80189d2a02941089a # frozen: 1.8.3
+    rev: 8609c684ccd6d868005399a191a2e285e8324b21 # frozen: 1.8.4
     hooks:
       - id: poetry-check
 
