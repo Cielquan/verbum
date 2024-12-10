@@ -214,7 +214,7 @@ repos:
 
   # pylint - python linter
   - repo: https://github.com/PyCQA/pylint/
-    rev: 76bce72bc57cc8089e439cc9d22fed5806341ed4 # frozen: v3.3.1
+    rev: a5a1bc3a9602d08f15ac90ad12f5b25bde375613 # frozen: v3.3.2
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
@@ -226,7 +226,7 @@ repos:
 
   # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: 8609c684ccd6d868005399a191a2e285e8324b21 # frozen: 1.8.4
+    rev: a0effc6f95b7b6e0a7945be3701c832eb29c0fba # frozen: 1.8.5
     hooks:
       - id: poetry-check
 
@@ -246,7 +246,7 @@ repos:
 
   # markdownlint - md file checker
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: 5e920a94ae1997fdd4efb48dfb4b36b950b24903 # frozen: v0.15.0
+    rev: 1d349044b9624661f5a0a7e13e0ca9801752022a # frozen: v0.16.0
     hooks:
       - id: markdownlint-cli2
 
