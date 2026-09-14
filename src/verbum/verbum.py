@@ -4,7 +4,6 @@ import enum
 import re
 import sys
 
-
 if sys.version_info[0:2] < (3, 10):  # pragma: no cover
     raise RuntimeError("Script runs only with python 3.10 or newer.")
 
@@ -29,8 +28,7 @@ class MainVersionNumber(enum.Enum):
     PATCH = "patch"
 
 
-VERVSION_RE = re.compile(
-    r"""(?x)
+VERVSION_RE = re.compile(r"""(?x)
         ^
         (?P<major>\d+)
         \.(?P<minor>\d+)
@@ -38,8 +36,7 @@ VERVSION_RE = re.compile(
         (?:a(?P<alpha>\d+)|b(?P<beta>\d+)|rc(?P<rc>\d+))?
         (?:\.post(?P<post>\d+))?
         $
-    """
-)
+    """)
 
 
 class BumpError(ValueError):
